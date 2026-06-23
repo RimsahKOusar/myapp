@@ -1,0 +1,82 @@
+/*
+  ============================================================
+  FILE: css/base.css
+  PURPOSE: Global reset, CSS custom properties (variables),
+           and base typography. This is the foundation every
+           other CSS module builds on top of.
+
+  WHAT LIVES HERE:
+  - CSS variables (colors, font sizes, spacing, timing)
+  - Box-model reset (*, margin/padding zero)
+  - Body defaults (font, background, color)
+  ============================================================
+*/
+
+
+/* ── 1. CSS Custom Properties (Design Tokens) ─────────────
+   Think of these like named constants. Changing one value
+   here updates every place it's used across ALL modules.
+   ─────────────────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --clr-bg:          #0f0f13;      /* Deep near-black background      */
+  --clr-surface:     #1a1a24;      /* Card / panel surface            */
+  --clr-surface-2:   #24243a;      /* Slightly lighter surface        */
+  --clr-border:      #2e2e45;      /* Subtle borders                  */
+
+  --clr-work:        #e8614a;      /* Red-orange accent — "work" mode */
+  --clr-short:       #4ab8a0;      /* Teal accent — "short break"     */
+  --clr-long:        #6b8cff;      /* Blue accent — "long break"      */
+  --clr-accent:      var(--clr-work); /* Active accent (changes w/ mode) */
+
+  --clr-text-primary:   #f0eff5;   /* Main readable text              */
+  --clr-text-secondary: #8a8aa0;   /* Muted labels and hints          */
+  --clr-text-on-accent: #ffffff;   /* Text sitting on colored buttons */
+
+  /* Typography */
+  --font-display: 'Space Mono', monospace;  /* Digits on the clock  */
+  --font-body:    'Inter', sans-serif;      /* All other text        */
+
+  --fs-xs:   0.75rem;   /*  12px */
+  --fs-sm:   0.875rem;  /*  14px */
+  --fs-base: 1rem;      /*  16px */
+  --fs-lg:   1.125rem;  /*  18px */
+  --fs-xl:   1.5rem;    /*  24px */
+  --fs-2xl:  2rem;      /*  32px */
+  --fs-timer: 3.5rem;   /*  56px — big countdown digits */
+
+  /* Spacing scale */
+  --sp-1:  0.25rem;   /*  4px */
+  --sp-2:  0.5rem;    /*  8px */
+  --sp-3:  0.75rem;   /* 12px */
+  --sp-4:  1rem;      /* 16px */
+  --sp-5:  1.25rem;   /* 20px */
+  --sp-6:  1.5rem;    /* 24px */
+  --sp-8:  2rem;      /* 32px */
+  --sp-10: 2.5rem;    /* 40px */
+  --sp-12: 3rem;      /* 48px */
+
+  /* Border radius */
+  --radius-sm:   6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow:   500ms ease;
+}
+
+
+/* ── 2. Box-Model Reset ────────────────────────────────────
+   Removes browser default margin/padding and switches to
+   border-box sizing so widths include padding & border.
+   ─────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
