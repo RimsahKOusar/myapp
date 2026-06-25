@@ -29,3 +29,14 @@ const btnSavePanel   = document.getElementById('btnSave');
 const inputWork  = document.getElementById('setWork');
 const inputShort = document.getElementById('setShort');
 const inputLong  = document.getElementById('setLong');
+
+/* ── initSettings() ────────────────────────────────────────
+   Called once by app.js at startup.
+   Attaches click listeners to all settings-related elements.
+   ─────────────────────────────────────────────────────── */
+function initSettings() {
+  btnSettingsBtn.addEventListener('click', openSettings);
+  btnClosePanel .addEventListener('click', closeSettings);
+  elOverlay     .addEventListener('click', closeSettings);   // Click outside to close
+  btnSavePanel  .addEventListener('click', saveSettings);
+}
