@@ -72,3 +72,28 @@ function closeSettings() {
   elPanel.setAttribute('aria-hidden', 'true');
 }
 
+/* ── saveSettings() ────────────────────────────────────────
+   Reads the three inputs, validates them, updates
+   state.durations, then resets the timer for the current
+   mode so the change takes effect immediately.
+   ─────────────────────────────────────────────────────── */
+function saveSettings() {
+  /* parseInt(value, 10) converts the string "25" to the number 25.
+     We clamp with Math.max so the user can't enter 0 or negative. */
+  const newWork  = Math.max(1, parseInt(inputWork.value,  10) || DEFAULT_DURATIONS.work);
+  const newShort = Math.max(1, parseInt(inputShort.value, 10) || DEFAULT_DURATIONS.short);
+  const newLong  = Math.max(1, parseInt(inputLong.value,  10) || DEFAULT_DURATIONS.long);
+
+  /* Update state with new durations */
+  state.durations.work  = newWork;
+  state.durations.short = newShort;
+  state.durations.long  = newLong;
+
+  /* Apply the new duration immediately to the current mode */
+  switchMode(state.mode);    // modes.js — resets clock with new duration
+
+  /* Persist the settings to localStorage */
+  saveStats();               // app.js
+
+  closeSettings();
+}
