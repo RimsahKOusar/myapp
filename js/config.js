@@ -32,3 +32,13 @@ const DEFAULT_DURATIONS = {
    to "hide" with stroke-dashoffset as time passes.
    ─────────────────────────────────────────────────────── */
 const RING_CIRCUMFERENCE = 2 * Math.PI * 88;   // ≈ 552.9
+
+/* ── 3. Mode Labels ────────────────────────────────────────
+   Human-readable labels shown below the countdown digits.
+   Keyed by the data-mode attribute on the HTML tab buttons.
+   ─────────────────────────────────────────────────────── */
+const MODE_LABELS = {
+  work:  'Focus time',
+  short: 'Short break',
+  long:  'Long break',
+};
