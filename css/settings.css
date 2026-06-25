@@ -1,0 +1,156 @@
+/*
+  ============================================================
+  FILE: css/settings.css
+  PURPOSE: Styles the settings side panel that slides in from
+           the right when the ⚙ gear button is clicked.
+
+  HOW THE SLIDE-IN WORKS:
+  The panel starts off-screen (translateX(100%)).
+  JS adds .is-open to the panel element, which triggers
+  the CSS transition to translateX(0) — sliding it into view.
+  ============================================================
+*/
+
+
+/* ── 1. Panel Shell ────────────────────────────────────────
+   Fixed position panel anchored to the right side of the
+   viewport. Hidden off-screen by default.
+   ─────────────────────────────────────────────────────── */
+.settings-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(340px, 90vw);           /* Never wider than 90% of viewport */
+  background: var(--clr-surface);
+  border-left: 1px solid var(--clr-border);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.4);
+  z-index: 20;                       /* Above the overlay */
+  transform: translateX(100%);       /* Off-screen to the right */
+  transition: transform var(--transition-slow);
+  /* Panel itself clips any overflow from inner padding */
+  overflow-y: auto;
+}
+
+/* JS adds .is-open → slides panel into view */
+.settings-panel.is-open {
+  transform: translateX(0);
+}
+
+
+/* ── 2. Inner Padding ──────────────────────────────────────
+   The actual content inside the panel with comfortable
+   padding so nothing hugs the edges.
+   ─────────────────────────────────────────────────────── */
+.settings-inner {
+  padding: var(--sp-8) var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  position: relative;          /* For the close button absolute positioning */
+}
+
+
+/* ── 3. Panel Title ────────────────────────────────────────
+   "Settings" heading inside the panel.
+   ─────────────────────────────────────────────────────── */
+.settings-title {
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+  margin-bottom: var(--sp-2);
+}
+
+
+/* ── 4. Each Setting Row ───────────────────────────────────
+   A label + number input side by side on one row.
+   Using <label> as the container lets the whole row be
+   clickable / focusable for accessibility.
+   ─────────────────────────────────────────────────────── */
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-4);
+  font-size: var(--fs-base);
+  color: var(--clr-text-secondary);
+  cursor: pointer;
+}
+
+.settings-row:hover {
+  color: var(--clr-text-primary);
+}
+
+
+/* ── 5. Number Input ───────────────────────────────────────
+   The small box where users type the minutes.
+   ─────────────────────────────────────────────────────── */
+.settings-input {
+  width: 68px;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--clr-surface-2);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  color: var(--clr-text-primary);
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  text-align: center;
+  transition: border-color var(--transition-fast);
+  /* Remove browser default number arrows on some browsers */
+  -moz-appearance: textfield;
+}
+
+.settings-input::-webkit-outer-spin-button,
+.settings-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.settings-input:focus {
+  outline: none;
+  border-color: var(--clr-accent);
+}
+
+
+/* ── 6. Save Button ────────────────────────────────────────
+   Full-width primary button inside the settings panel.
+   ─────────────────────────────────────────────────────── */
+.btn-save {
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  margin-top: var(--sp-2);
+  background: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--transition-fast),
+              transform var(--transition-fast);
+}
+
+.btn-save:hover  { opacity: 0.88; }
+.btn-save:active { transform: scale(0.98); }
+
+
+/* ── 7. Close (✕) Button ───────────────────────────────────
+   Sits in the top-right corner of the panel inner area.
+   ─────────────────────────────────────────────────────── */
+.btn-close-settings {
+  position: absolute;
+  top: var(--sp-5);
+  right: var(--sp-5);
+  background: none;
+  border: none;
+  color: var(--clr-text-secondary);
+  font-size: var(--fs-xl);
+  cursor: pointer;
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.btn-close-settings:hover {
+  color: var(--clr-text-primary);
+}
