@@ -34,3 +34,41 @@ function initModes() {
     });
   });
 }
+
+/* ── switchMode(mode) ──────────────────────────────────────
+   The main function that handles a mode change.
+   Called by tab clicks AND by settings.js after saving
+   (to re-apply the duration change immediately).
+
+   @param {string} mode - 'work' | 'short' | 'long'
+   ─────────────────────────────────────────────────────── */
+function switchMode(mode) {
+  /* --- Stop any running timer first --- */
+  if (state.isRunning) {
+    pauseTimer();           // timer.js
+    syncStartButton();      // controls.js — reset button label to "▶ Start"
+  }
+
+  /* --- Update the state --- */
+  state.mode = mode;
+
+  /* --- Update tab .active class ---
+     Remove .active from all tabs, then add it to the
+     one that matches the selected mode.                   */
+  tabButtons.forEach(tab => tab.classList.remove('active'));
+
+  const activeTab = document.querySelector(`.tab[data-mode="${mode}"]`);
+  if (activeTab) activeTab.classList.add('active');
+
+  /* --- Update the accent color on :root ---
+     document.documentElement = the <html> element.
+     Setting a CSS variable here affects every element
+     that uses var(--clr-accent) in any CSS file.         */
+  document.documentElement.style.setProperty(
+    CSS_ACCENT_VAR,      // '--clr-accent'
+    MODE_COLORS[mode]    // e.g. 'var(--clr-work)'
+  );
+
+  /* --- Reset the timer to the new mode's duration --- */
+  setTimerMode(mode);    // timer.js
+}
