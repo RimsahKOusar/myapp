@@ -29,7 +29,29 @@
     <button class="tab" data-mode="short">Short Break</button>
     <button class="tab" data-mode="long">Long Break</button>
   </section>
-  
+
+  <!-- ════════════════════════════════════════════════════
+    MODULE: Timer Face
+    The big circular countdown display.
+  ════════════════════════════════════════════════════ -->
+  <main class="timer-wrapper">
+    <div class="timer-ring-container" role="timer" aria-live="polite">
+      <!-- SVG ring that animates as time passes -->
+      <svg class="progress-ring" viewBox="0 0 200 200" aria-  hidden="true">
+        <circle class="ring-track" cx="100" cy="100" r="88" />
+        <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="88" />
+      </svg>
+
+      <!-- Countdown digits in the center of the ring -->
+      <div class="timer-display">
+        <span class="timer-minutes" id="timerMinutes">25</span>
+        <span class="timer-colon">:</span>
+        <span class="timer-seconds" id="timerSeconds">00</span>
+      </div>
+
+      <!-- Label below the digits (e.g. "Focus time") -->
+      <p class="timer-label" id="timerLabel">Focus time</p>
+    </div>
 
 
   <!-- Google tag (gtag.js) -->
