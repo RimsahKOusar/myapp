@@ -23,3 +23,12 @@ const DEFAULT_DURATIONS = {
   short:  5,   /* Short break between sessions   */
   long:  15,   /* Longer break after 4 pomodoros */
 };
+
+/* ── 2. SVG Ring Geometry ──────────────────────────────────
+   The progress ring in the HTML has r="88" (radius = 88px).
+   Circumference = 2 × π × r = 2 × 3.14159 × 88 ≈ 553.
+
+   timer.js uses this to calculate how much of the arc
+   to "hide" with stroke-dashoffset as time passes.
+   ─────────────────────────────────────────────────────── */
+const RING_CIRCUMFERENCE = 2 * Math.PI * 88;   // ≈ 552.9
