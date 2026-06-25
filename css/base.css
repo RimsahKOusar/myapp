@@ -92,3 +92,12 @@ body {
   min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
 }
+/* ── 4. Focus Ring ─────────────────────────────────────────
+   Makes keyboard focus visible for accessibility (a11y).
+   Browsers remove the default outline on many elements.
+   ─────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
