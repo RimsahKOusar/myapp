@@ -67,3 +67,27 @@ function resetTimer() {
   state.secondsLeft = state.totalSeconds; // Restore to full duration
   renderTimer();
 }
+/* ── renderTimer() ─────────────────────────────────────────
+   Reads state.secondsLeft and updates THREE things:
+   1. The MM digit on screen
+   2. The SS digit on screen
+   3. The SVG ring stroke-dashoffset (arc animation)
+   ─────────────────────────────────────────────────────── */
+function renderTimer() {
+  /* --- 1. Calculate minutes and seconds --- */
+  const mins = Math.floor(state.secondsLeft / 60);
+  const secs = state.secondsLeft % 60;
+
+  /* --- 2. Display with leading zero (e.g. "04" not "4") --- */
+  elMinutes.textContent = String(mins).padStart(2, '0');
+  elSeconds.textContent = String(secs).padStart(2, '0');
+
+  /* --- 3. Update the SVG ring arc ---
+     progress = fraction of time REMAINING (1.0 → 0.0)
+     offset   = how much of the circumference to hide
+     When progress = 1.0 (full time): offset = 0     (full arc)
+     When progress = 0.0 (no time):   offset = 553   (no arc)  */
+  const progress = state.secondsLeft / state.totalSeconds;
+  const offset   = RING_CIRCUMFERENCE * (1 - progress);
+  elRing.style.strokeDashoffset = offset;
+}
