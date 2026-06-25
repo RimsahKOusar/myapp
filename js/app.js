@@ -56,3 +56,14 @@ function loadSavedData() {
     console.warn('Pomodoro: could not load saved data.', err);
   }
 }
+/* ── saveStats() ───────────────────────────────────────────
+   Saves the current pomodoroCount and durations to
+   localStorage. Called after a session ends or settings save.
+   ─────────────────────────────────────────────────────── */
+function saveStats() {
+  const dataToSave = {
+    pomodoroCount: state.pomodoroCount,
+    durations:     state.durations,
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+}
