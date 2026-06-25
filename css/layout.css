@@ -43,3 +43,13 @@ body {
   color: var(--clr-text-primary);
   letter-spacing: -0.02em;
 }
+/* ── 3. Content Width Cap ──────────────────────────────────
+   Mode tabs, the timer, stats bar — all capped at 420px
+   so the app doesn't look stretched on wide screens.
+   ─────────────────────────────────────────────────────── */
+.mode-tabs,
+.timer-wrapper,
+.stats-bar {
+  width: 100%;
+  max-width: 420px;
+}
