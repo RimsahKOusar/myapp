@@ -101,3 +101,15 @@ body {
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
+/* ── 5. Reduce Motion ──────────────────────────────────────
+   Respects the OS-level "Reduce Motion" accessibility setting.
+   Users who are sensitive to animation won't see transitions.
+   ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
