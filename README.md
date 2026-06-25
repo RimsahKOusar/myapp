@@ -24,3 +24,10 @@ pomodoro-timer/
 │   ├── timer.css       ← Clock ring, countdown digits, label
 │   ├── controls.css    ← Start/Pause/Reset buttons
 │   ├── modes.css       ← Work/Break tab switcher
+│   ├── stats.css       ← Pomodoro dot tracker bar
+│   └── settings.css    ← Slide-in settings panel
+│
+├── js/
+│   ├── config.js       ← Constants and default values (single source of truth)
+│   ├── state.js        ← App state object (all changeable data)
+│   ├── timer.js        ← Countdown logic + ring animation
