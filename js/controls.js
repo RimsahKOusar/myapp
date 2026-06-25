@@ -42,6 +42,18 @@ function initControls() {
     syncStartButton();        // Put the Start button back to ▶ Start
   });
 }
+/* ── syncStartButton() ─────────────────────────────────────
+   Reads state.isRunning and updates the Start button's
+   label text accordingly. Call this whenever isRunning
+   changes so the button always shows the right action.
+   ─────────────────────────────────────────────────────── */
+function syncStartButton() {
+  if (state.isRunning) {
+    btnStart.textContent = '⏸ Pause';   // Timer is running → offer Pause
+  } else {
+    btnStart.textContent = '▶ Start';   // Timer is paused  → offer Start
+  }
+}
 /* ── triggerPulse() ────────────────────────────────────────
    Adds the .pulse CSS class to the Start button momentarily
    to create the ring-expand animation (defined in
