@@ -49,3 +49,12 @@ function startTimer() {
     renderTimer();                   // Update the display
   }, 1000);                          // Fire every 1000ms = 1 second
 }
+/* ── pauseTimer() ──────────────────────────────────────────
+   Pauses the countdown without resetting the time left.
+   ─────────────────────────────────────────────────────── */
+function pauseTimer() {
+  state.isRunning = false;
+  clearInterval(state.intervalId);   // Stop the ticking
+  state.intervalId = null;
+  elColon.classList.remove('blink'); // Stop the colon blink
+}
