@@ -67,3 +67,36 @@ function saveStats() {
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
 }
+
+/* ── boot() ────────────────────────────────────────────────
+   Runs once when the page loads.
+   Initialises every module in the right order and does
+   the first render to put the UI in its correct state.
+   ─────────────────────────────────────────────────────── */
+function boot() {
+  /* Step 1 — Load any previously saved data into state */
+  loadSavedData();
+
+  /* Step 2 — Apply saved durations: update totalSeconds
+     and secondsLeft to match (work mode at startup)       */
+  state.totalSeconds = state.durations.work * 60;
+  state.secondsLeft  = state.durations.work * 60;
+
+  /* Step 3 — Init all modules (attach event listeners) */
+  initModes();      // modes.js
+  initControls();   // controls.js
+  initSettings();   // settings.js
+
+  /* Step 4 — First renders: paint the UI correctly */
+  renderTimer();    // timer.js — show correct time on clock
+  renderStats();    // stats.js — show saved pomodoro dots
+
+  /* Step 5 — Ensure Start button shows correct label */
+  syncStartButton();  // controls.js
+
+  console.log('🍅 Pomodoro Timer ready!');
+}
+
+
+/* ── Run boot when the page finishes loading ───────────── */
+document.addEventListener('DOMContentLoaded', boot);
