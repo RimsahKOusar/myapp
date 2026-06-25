@@ -53,3 +53,21 @@ body {
   width: 100%;
   max-width: 420px;
 }
+/* ── 5. Overlay (behind Settings Panel) ───────────────────
+   A semi-transparent dark layer that appears when the
+   settings panel slides in. Clicking it closes the panel.
+   ─────────────────────────────────────────────────────── */
+.overlay {
+  display: none;              /* Hidden by default             */
+  position: fixed;
+  inset: 0;                   /* Covers the whole screen       */
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 10;
+  backdrop-filter: blur(2px); /* Frosted-glass effect          */
+  transition: opacity var(--transition-normal);
+}
+
+/* JS adds .is-open to show the overlay */
+.overlay.is-open {
+  display: block;
+}
