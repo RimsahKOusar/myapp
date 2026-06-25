@@ -27,6 +27,8 @@ const elSeconds    = document.getElementById('timerSeconds');
 const elColon      = document.querySelector('.timer-colon');
 const elRing       = document.getElementById('ringProgress');
 const elTimerLabel = document.getElementById('timerLabel');
+
+
 /* ── startTimer() ──────────────────────────────────────────
    Begins the countdown by setting up a 1-second interval.
    Guards against double-starting (if already running, stop).
@@ -40,7 +42,7 @@ function startTimer() {
   state.intervalId = setInterval(() => {
     if (state.secondsLeft <= 0) {
       // Time is up — stop the timer and notify
-      stopTimer();
+      pauseTimer();
       onTimerEnd();
       return;
     }
@@ -49,6 +51,8 @@ function startTimer() {
     renderTimer();                   // Update the display
   }, 1000);                          // Fire every 1000ms = 1 second
 }
+
+
 /* ── pauseTimer() ──────────────────────────────────────────
    Pauses the countdown without resetting the time left.
    ─────────────────────────────────────────────────────── */
@@ -58,6 +62,8 @@ function pauseTimer() {
   state.intervalId = null;
   elColon.classList.remove('blink'); // Stop the colon blink
 }
+
+
 /* ── resetTimer() ──────────────────────────────────────────
    Stops the timer AND restores secondsLeft to the full
    duration for the current mode. Ring also resets.
@@ -67,6 +73,8 @@ function resetTimer() {
   state.secondsLeft = state.totalSeconds; // Restore to full duration
   renderTimer();
 }
+
+
 /* ── renderTimer() ─────────────────────────────────────────
    Reads state.secondsLeft and updates THREE things:
    1. The MM digit on screen
@@ -91,6 +99,8 @@ function renderTimer() {
   const offset   = RING_CIRCUMFERENCE * (1 - progress);
   elRing.style.strokeDashoffset = offset;
 }
+
+
 /* ── setTimerMode() ────────────────────────────────────────
    Called by modes.js when the user clicks a mode tab.
    Resets the clock to the new mode's duration and updates
@@ -124,5 +134,3 @@ function onTimerEnd() {
   state.secondsLeft = state.totalSeconds;
   renderTimer();
 }
-
-

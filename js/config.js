@@ -1,4 +1,4 @@
-*
+/*
   ============================================================
   FILE: js/config.js
   PURPOSE: Central place for all app-wide constants and

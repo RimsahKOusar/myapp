@@ -1,4 +1,5 @@
-============================================================
+/*
+  ============================================================
   FILE: css/layout.css
   PURPOSE: Controls the overall page structure — how sections
            are stacked, centered, and spaced on the screen.
@@ -43,6 +44,8 @@ body {
   color: var(--clr-text-primary);
   letter-spacing: -0.02em;
 }
+
+
 /* ── 3. Content Width Cap ──────────────────────────────────
    Mode tabs, the timer, stats bar — all capped at 420px
    so the app doesn't look stretched on wide screens.
@@ -53,6 +56,19 @@ body {
   width: 100%;
   max-width: 420px;
 }
+
+
+/* ── 4. Timer Wrapper ──────────────────────────────────────
+   Centers the ring + controls in a column.
+   ─────────────────────────────────────────────────────── */
+.timer-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-8);
+}
+
+
 /* ── 5. Overlay (behind Settings Panel) ───────────────────
    A semi-transparent dark layer that appears when the
    settings panel slides in. Clicking it closes the panel.

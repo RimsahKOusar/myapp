@@ -35,6 +35,7 @@ function initModes() {
   });
 }
 
+
 /* ── switchMode(mode) ──────────────────────────────────────
    The main function that handles a mode change.
    Called by tab clicks AND by settings.js after saving
