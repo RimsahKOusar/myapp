@@ -1,0 +1,131 @@
+/*
+  ============================================================
+  FILE: css/timer.css
+  PURPOSE: Styles the circular countdown clock — the SVG
+           progress ring and the large digit display inside it.
+
+  HOW THE RING ANIMATION WORKS:
+  We use an SVG <circle> with a stroke-dasharray trick:
+  - stroke-dasharray = the full circumference of the circle
+  - stroke-dashoffset = how much of that circumference to "hide"
+  As time passes, JS increases stroke-dashoffset so the
+  colored arc shrinks — like a pie chart draining down.
+  ============================================================
+*/
+
+
+/* ── 1. Ring Container ─────────────────────────────────────
+   positions-relative so the digit display can be
+   absolutely centered inside the SVG ring.
+   ─────────────────────────────────────────────────────── */
+.timer-ring-container {
+  position: relative;
+  width: 240px;
+  height: 240px;
+}
+
+
+/* ── 2. SVG Canvas ─────────────────────────────────────────
+   The SVG fills its container. It's rotated -90° so the
+   arc starts at the top (12 o'clock) instead of the right.
+   ─────────────────────────────────────────────────────── */
+.progress-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);    /* Start arc at top */
+}
+
+
+/* ── 3. Ring Track (background circle) ────────────────────
+   The faint grey full circle underneath the colored arc.
+   It shows the "empty" portion of the timer.
+   ─────────────────────────────────────────────────────── */
+.ring-track {
+  fill: none;
+  stroke: var(--clr-surface-2);
+  stroke-width: 10px;
+}
+
+
+/* ── 4. Ring Progress (animated arc) ──────────────────────
+   The colored arc that shrinks as time counts down.
+
+   Circumference of circle with r=88:
+   C = 2 × π × 88 ≈ 553  (used in timer.js)
+
+   stroke-dasharray sets the full length of the dash.
+   stroke-dashoffset is how much to shift the dash start,
+   effectively hiding part of the arc.
+   ─────────────────────────────────────────────────────── */
+.ring-progress {
+  fill: none;
+  stroke: var(--clr-accent);       /* Color matches current mode  */
+  stroke-width: 10px;
+  stroke-linecap: round;           /* Rounded end caps on the arc */
+  stroke-dasharray: 553;           /* Full circumference (C ≈ 553) */
+  stroke-dashoffset: 0;            /* 0 = full arc visible        */
+  transition: stroke-dashoffset 1s linear,   /* Smooth per-second drain  */
+              stroke var(--transition-normal); /* Smooth color mode change */
+}
+
+
+/* ── 5. Digit Display (overlaid on the SVG) ───────────────
+   Absolutely centered inside the ring container.
+   Uses a flex column to stack MM:SS on top of the label.
+   ─────────────────────────────────────────────────────── */
+.timer-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -54%);   /* -54% nudges up slightly to make room for label */
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+/* The MM and SS digit spans */
+.timer-minutes,
+.timer-seconds {
+  font-family: var(--font-display);   /* Monospace so digits don't shift width */
+  font-size: var(--fs-timer);
+  font-weight: 700;
+  color: var(--clr-text-primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* The ":" separator between minutes and seconds */
+.timer-colon {
+  font-family: var(--font-display);
+  font-size: var(--fs-timer);
+  font-weight: 700;
+  color: var(--clr-text-secondary);
+  line-height: 1;
+  /* Blink the colon when timer is running — see app.js */
+  transition: opacity var(--transition-fast);
+}
+
+.timer-colon.blink {
+  animation: colonBlink 1s step-end infinite;
+}
+
+@keyframes colonBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+
+/* ── 6. Timer Label ────────────────────────────────────────
+   Small text below the digits: "Focus time" / "Break time"
+   ─────────────────────────────────────────────────────── */
+.timer-label {
+  position: absolute;
+  bottom: 44px;               /* Sits just below the digits */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--fs-sm);
+  color: var(--clr-text-secondary);
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
