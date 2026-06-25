@@ -1,0 +1,88 @@
+/*
+  ============================================================
+  FILE: css/stats.css
+  PURPOSE: Styles the stats bar at the bottom of the app —
+           the row of tomato dots and the "X pomodoros" count.
+
+  HOW THE DOTS WORK:
+  stats.js dynamically creates <span class="dot"> elements.
+  Completed pomodoros get the class .dot--filled.
+  Up to 8 dots are shown; more pomodoros re-use the slots.
+  ============================================================
+*/
+
+
+/* ── 1. Stats Bar Container ────────────────────────────────
+   A horizontal strip with the label, dots, and count aligned
+   in a row with space between them.
+   ─────────────────────────────────────────────────────── */
+.stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-3) var(--sp-5);
+}
+
+
+/* ── 2. "Today" Label ──────────────────────────────────────
+   Left-side label. Muted and small — supporting info.
+   ─────────────────────────────────────────────────────── */
+.stats-label {
+  font-size: var(--fs-sm);
+  color: var(--clr-text-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+
+/* ── 3. Dot Row ────────────────────────────────────────────
+   The group of circles that visualise completed pomodoros.
+   Grows to fill available space in the bar.
+   ─────────────────────────────────────────────────────── */
+.pomodoro-dots {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex: 1;                    /* Stretches to push count to the right */
+  flex-wrap: wrap;
+}
+
+
+/* ── 4. Individual Dot ─────────────────────────────────────
+   Empty circle by default; .dot--filled makes it solid.
+   ─────────────────────────────────────────────────────── */
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--clr-border);
+  background: transparent;
+  transition: background var(--transition-normal),
+              border-color var(--transition-normal),
+              transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);  /* Springy fill */
+}
+
+/* When a pomodoro is completed — dot becomes a solid tomato */
+.dot.dot--filled {
+  background: var(--clr-work);
+  border-color: var(--clr-work);
+  transform: scale(1.15);    /* Slight pop to celebrate the completion */
+}
+
+
+/* ── 5. Count Text ─────────────────────────────────────────
+   Right-side count like "3 pomodoros". Muted text.
+   ─────────────────────────────────────────────────────── */
+.stats-count {
+  font-size: var(--fs-sm);
+  color: var(--clr-text-secondary);
+  white-space: nowrap;
+}
+
+/* The number itself is slightly brighter */
+.stats-count span {
+  color: var(--clr-text-primary);
+  font-weight: 600;
+}
