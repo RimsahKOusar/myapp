@@ -21,3 +21,16 @@
    to attach click listeners and manage the .active class.
    ─────────────────────────────────────────────────────── */
 const tabButtons = document.querySelectorAll('.tab');
+
+/* ── initModes() ───────────────────────────────────────────
+   Called once by app.js at startup.
+   Attaches a click listener to every tab button.
+   ─────────────────────────────────────────────────────── */
+function initModes() {
+  tabButtons.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const selectedMode = tab.dataset.mode;  // e.g. 'work', 'short', 'long'
+      switchMode(selectedMode);
+    });
+  });
+}
