@@ -91,6 +91,38 @@ function renderTimer() {
   const offset   = RING_CIRCUMFERENCE * (1 - progress);
   elRing.style.strokeDashoffset = offset;
 }
+/* ── setTimerMode() ────────────────────────────────────────
+   Called by modes.js when the user clicks a mode tab.
+   Resets the clock to the new mode's duration and updates
+   the label text ("Focus time" / "Short break" / etc.)
+   ─────────────────────────────────────────────────────── */
+function setTimerMode(mode) {
+  const durationInSeconds = state.durations[mode] * 60;
+  state.totalSeconds      = durationInSeconds;
+  state.secondsLeft       = durationInSeconds;
+  elTimerLabel.textContent = MODE_LABELS[mode];
+  renderTimer();
+}
 
+
+/* ── onTimerEnd() ──────────────────────────────────────────
+   Fired when the countdown reaches zero.
+   - Plays the alert sound (audio.js)
+   - Increments the pomodoro count if a work session ended
+   - Saves the count to localStorage
+   ─────────────────────────────────────────────────────── */
+function onTimerEnd() {
+  playAlert();                       // audio.js
+
+  if (state.mode === 'work') {
+    state.pomodoroCount += 1;
+    saveStats();                     // app.js — persist to localStorage
+    renderStats();                   // stats.js — update the dots display
+  }
+
+  // Reset ring to full so it's ready for the next session
+  state.secondsLeft = state.totalSeconds;
+  renderTimer();
+}
 
 
