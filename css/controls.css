@@ -1,0 +1,118 @@
+/*
+  ============================================================
+  FILE: css/controls.css
+  PURPOSE: Styles for the Start / Pause and Reset buttons
+           that sit below the countdown ring.
+
+  BUTTON TYPES:
+  - .btn-primary  → big colored "Start / Pause" action button
+  - .btn-secondary → smaller outlined "Reset" button
+  - .btn-settings  → icon-only gear button in the header
+  ============================================================
+*/
+
+
+/* ── 1. Controls Row ───────────────────────────────────────
+   A horizontal group that holds the Reset and Start buttons
+   side by side, centered under the clock.
+   ─────────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+
+/* ── 2. Shared Button Base ─────────────────────────────────
+   Properties common to all .btn-control buttons.
+   ─────────────────────────────────────────────────────── */
+.btn-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  border: none;
+  border-radius: var(--radius-full);   /* Pill shape */
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+              opacity  var(--transition-fast),
+              background var(--transition-normal);
+  /* Prevent text selection on rapid clicks */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Press feedback — the button "dips" slightly */
+.btn-control:active {
+  transform: scale(0.95);
+}
+
+
+/* ── 3. Primary Button (Start / Pause) ────────────────────
+   The main call-to-action. Uses the mode accent color so
+   it automatically changes when Work / Break mode switches.
+   ─────────────────────────────────────────────────────── */
+.btn-primary {
+  background: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+  padding: var(--sp-4) var(--sp-10);
+  font-size: var(--fs-lg);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4),
+              0 0 0 0 var(--clr-accent);  /* For pulse animation start */
+}
+
+.btn-primary:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+/* Pulse ring that appears briefly when timer starts */
+.btn-primary.pulse {
+  animation: btnPulse 0.5s ease-out;
+}
+
+@keyframes btnPulse {
+  0%   { box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 0   var(--clr-accent); }
+  70%  { box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 14px transparent; }
+  100% { box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 0   transparent; }
+}
+
+
+/* ── 4. Secondary Button (Reset) ──────────────────────────
+   Smaller, outlined style — secondary priority visually.
+   ─────────────────────────────────────────────────────── */
+.btn-secondary {
+  background: transparent;
+  color: var(--clr-text-secondary);
+  border: 1.5px solid var(--clr-border);
+  padding: var(--sp-3) var(--sp-6);
+}
+
+.btn-secondary:hover {
+  border-color: var(--clr-text-secondary);
+  color: var(--clr-text-primary);
+}
+
+
+/* ── 5. Settings Gear Button ───────────────────────────────
+   Icon-only button in the header. No background, no border.
+   ─────────────────────────────────────────────────────── */
+.btn-settings {
+  background: none;
+  border: none;
+  color: var(--clr-text-secondary);
+  font-size: var(--fs-xl);
+  cursor: pointer;
+  line-height: 1;
+  padding: var(--sp-1);
+  transition: color var(--transition-fast),
+              transform var(--transition-normal);
+}
+
+.btn-settings:hover {
+  color: var(--clr-text-primary);
+  transform: rotate(30deg);    /* Fun spin on hover */
+}
