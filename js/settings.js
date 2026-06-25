@@ -61,3 +61,14 @@ function openSettings() {
   /* Move keyboard focus into the panel for accessibility */
   inputWork.focus();
 }
+
+
+/* ── closeSettings() ───────────────────────────────────────
+   Slides the panel back off-screen and hides the overlay.
+   ─────────────────────────────────────────────────────── */
+function closeSettings() {
+  elPanel  .classList.remove('is-open');
+  elOverlay.classList.remove('is-open');
+  elPanel.setAttribute('aria-hidden', 'true');
+}
+
