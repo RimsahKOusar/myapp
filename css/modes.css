@@ -1,0 +1,76 @@
+/*
+  ============================================================
+  FILE: css/modes.css
+  PURPOSE: Styles the three mode tabs — Work, Short Break,
+           Long Break — and handles their active state colors.
+
+  HOW IT WORKS:
+  The tab row is a flex container. When JS adds the .active
+  class to a tab, it gets a colored background matching
+  the mode (red for work, teal for short, blue for long).
+  The CSS variable --clr-accent on :root is also updated
+  by JS so the ring and button stay in sync.
+  ============================================================
+*/
+
+
+/* ── 1. Tab Row ────────────────────────────────────────────
+   A pill-shaped container that groups all three tabs.
+   ─────────────────────────────────────────────────────── */
+.mode-tabs {
+  display: flex;
+  background: var(--clr-surface);
+  border-radius: var(--radius-full);
+  padding: var(--sp-1);
+  gap: var(--sp-1);
+}
+
+
+/* ── 2. Individual Tab ─────────────────────────────────────
+   Each tab grows equally to fill the row.
+   ─────────────────────────────────────────────────────── */
+.tab {
+  flex: 1;                           /* Equal width for all tabs  */
+  border: none;
+  background: transparent;
+  color: var(--clr-text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background var(--transition-normal),
+              color     var(--transition-normal);
+  white-space: nowrap;
+}
+
+.tab:hover:not(.active) {
+  color: var(--clr-text-primary);
+  background: var(--clr-surface-2);
+}
+
+
+/* ── 3. Active Tab ─────────────────────────────────────────
+   The selected tab gets a solid colored background.
+   Each mode has its own color defined via data-mode.
+   ─────────────────────────────────────────────────────── */
+.tab.active {
+  color: var(--clr-text-on-accent);
+  font-weight: 600;
+}
+
+/* Work mode tab → red-orange */
+.tab.active[data-mode="work"] {
+  background: var(--clr-work);
+}
+
+/* Short Break tab → teal */
+.tab.active[data-mode="short"] {
+  background: var(--clr-short);
+}
+
+/* Long Break tab → blue */
+.tab.active[data-mode="long"] {
+  background: var(--clr-long);
+}
