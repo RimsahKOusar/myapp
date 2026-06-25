@@ -40,3 +40,24 @@ function initSettings() {
   elOverlay     .addEventListener('click', closeSettings);   // Click outside to close
   btnSavePanel  .addEventListener('click', saveSettings);
 }
+
+/* ── openSettings() ────────────────────────────────────────
+   Slides the panel into view.
+   Syncs the input fields to whatever durations are currently
+   set in state (so edits-in-progress don't persist if you
+   close without saving, then reopen).
+   ─────────────────────────────────────────────────────── */
+function openSettings() {
+  /* Populate inputs with current (possibly already customised) values */
+  inputWork .value = state.durations.work;
+  inputShort.value = state.durations.short;
+  inputLong .value = state.durations.long;
+
+  /* Show panel and overlay */
+  elPanel  .classList.add('is-open');
+  elOverlay.classList.add('is-open');
+  elPanel.setAttribute('aria-hidden', 'false');
+
+  /* Move keyboard focus into the panel for accessibility */
+  inputWork.focus();
+}
