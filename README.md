@@ -31,3 +31,10 @@ pomodoro-timer/
 │   ├── config.js       ← Constants and default values (single source of truth)
 │   ├── state.js        ← App state object (all changeable data)
 │   ├── timer.js        ← Countdown logic + ring animation
+│   ├── modes.js        ← Tab switching + accent color changes
+│   ├── controls.js     ← Button click handlers
+│   ├── stats.js        ← Dot tracker rendering
+│   ├── settings.js     ← Settings panel open/close/save
+│   ├── audio.js        ← Sound alert (Web Audio API)
+│   └── app.js          ← Boot file: wires modules + localStorage
+
