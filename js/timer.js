@@ -27,3 +27,25 @@ const elSeconds    = document.getElementById('timerSeconds');
 const elColon      = document.querySelector('.timer-colon');
 const elRing       = document.getElementById('ringProgress');
 const elTimerLabel = document.getElementById('timerLabel');
+/* ── startTimer() ──────────────────────────────────────────
+   Begins the countdown by setting up a 1-second interval.
+   Guards against double-starting (if already running, stop).
+   ─────────────────────────────────────────────────────── */
+function startTimer() {
+  if (state.isRunning) return;       // Already running → do nothing
+
+  state.isRunning = true;
+  elColon.classList.add('blink');    // Start blinking the colon
+
+  state.intervalId = setInterval(() => {
+    if (state.secondsLeft <= 0) {
+      // Time is up — stop the timer and notify
+      stopTimer();
+      onTimerEnd();
+      return;
+    }
+
+    state.secondsLeft -= 1;          // Deduct one second
+    renderTimer();                   // Update the display
+  }, 1000);                          // Fire every 1000ms = 1 second
+}
