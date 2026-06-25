@@ -60,3 +60,17 @@ const MODE_COLORS = {
   short: 'var(--clr-short)',
   long:  'var(--clr-long)',
 };
+
+/* ── 6. Stats Dot Count ────────────────────────────────────
+   How many dots to display in the stats bar.
+   If the user completes more pomodoros, the dots "wrap"
+   and the fill restarts from the first dot.
+   ─────────────────────────────────────────────────────── */
+const MAX_DOTS = 8;
+
+
+/* ── 7. LocalStorage Key ───────────────────────────────────
+   Key under which the app saves the pomodoro count and
+   custom durations to localStorage (browser storage).
+   ─────────────────────────────────────────────────────── */
+const STORAGE_KEY = 'pomodoroData';
