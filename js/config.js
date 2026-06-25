@@ -42,3 +42,21 @@ const MODE_LABELS = {
   short: 'Short break',
   long:  'Long break',
 };
+
+/* ── 4. CSS Custom Property Names ─────────────────────────
+   The CSS variable we update on :root to change the accent
+   color whenever the mode changes. Defined here so it's
+   easy to find if the variable name ever needs updating.
+   ─────────────────────────────────────────────────────── */
+const CSS_ACCENT_VAR = '--clr-accent';
+
+
+/* ── 5. CSS Color Values Per Mode ─────────────────────────
+   Maps each mode to the CSS variable holding that mode's
+   color. These reference variables defined in base.css.
+   ─────────────────────────────────────────────────────── */
+const MODE_COLORS = {
+  work:  'var(--clr-work)',
+  short: 'var(--clr-short)',
+  long:  'var(--clr-long)',
+};
