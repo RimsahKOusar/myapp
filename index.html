@@ -80,6 +80,34 @@
     </p>
   </section>
 
+  <!-- ════════════════════════════════════════════════════
+    MODULE: Settings Panel
+    Slide-in panel to change durations. Hidden by default.
+  ════════════════════════════════════════════════════ -->
+  <aside class="settings-panel" id="settingsPanel" aria-hidden="true">
+    <div class="settings-inner">
+      <h2 class="settings-title">Settings</h2>
+
+      <label class="settings-row">
+        <span>Work duration (min)</span>
+        <input type="number" id="setWork" class="settings-input" value="25" min="1" max="60" />
+      </label>
+
+      <label class="settings-row">
+        <span>Short break (min)</span>
+        <input type="number" id="setShort" class="settings-input" value="5" min="1" max="30" />
+      </label>
+
+      <label class="settings-row">
+        <span>Long break (min)</span>
+        <input type="number" id="setLong" class="settings-input" value="15" min="1" max="60" />
+      </label>
+
+      <button class="btn-save" id="btnSave">Save</button>
+      <button class="btn-close-settings" id="btnCloseSettings" aria-label="Close settings">✕</button>
+    </div>
+  </aside>
+
 
 
   <!-- Google tag (gtag.js) -->
