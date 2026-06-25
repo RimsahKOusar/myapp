@@ -58,3 +58,12 @@ function pauseTimer() {
   state.intervalId = null;
   elColon.classList.remove('blink'); // Stop the colon blink
 }
+/* ── resetTimer() ──────────────────────────────────────────
+   Stops the timer AND restores secondsLeft to the full
+   duration for the current mode. Ring also resets.
+   ─────────────────────────────────────────────────────── */
+function resetTimer() {
+  pauseTimer();
+  state.secondsLeft = state.totalSeconds; // Restore to full duration
+  renderTimer();
+}
