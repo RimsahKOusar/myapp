@@ -19,3 +19,26 @@
    ─────────────────────────────────────────────────────── */
 const btnStart = document.getElementById('btnStart');
 const btnReset = document.getElementById('btnReset');
+
+/* ── initControls() ────────────────────────────────────────
+   Called once by app.js at startup.
+   Attaches click listeners to the two control buttons.
+   ─────────────────────────────────────────────────────── */
+function initControls() {
+  /* --- Start / Pause toggle --- */
+  btnStart.addEventListener('click', () => {
+    if (state.isRunning) {
+      pauseTimer();           // timer.js — pauses the countdown
+    } else {
+      startTimer();           // timer.js — starts the countdown
+      triggerPulse();         // visual feedback pulse on the button
+    }
+    syncStartButton();        // Update the button label + style
+  });
+
+  /* --- Reset --- */
+  btnReset.addEventListener('click', () => {
+    resetTimer();             // timer.js — stops and restores time
+    syncStartButton();        // Put the Start button back to ▶ Start
+  });
+}
