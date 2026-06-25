@@ -80,3 +80,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* ── 3. Base Body Styles ───────────────────────────────────
+   Sets the app's background, default font, and text color.
+   ─────────────────────────────────────────────────────── */
+body {
+  background-color: var(--clr-bg);
+  color: var(--clr-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}

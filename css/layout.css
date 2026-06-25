@@ -1,0 +1,45 @@
+============================================================
+  FILE: css/layout.css
+  PURPOSE: Controls the overall page structure — how sections
+           are stacked, centered, and spaced on the screen.
+
+  WHAT LIVES HERE:
+  - App-header layout (title + settings icon)
+  - Main vertical centering & max-width constraint
+  - Responsive padding for mobile vs desktop
+  ============================================================
+*/
+
+
+/* ── 1. Page Shell ─────────────────────────────────────────
+   A flex column that stretches to fill the full viewport.
+   Children stack vertically and are centered horizontally.
+   ─────────────────────────────────────────────────────── */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* Horizontally center everything */
+  padding: var(--sp-6) var(--sp-4) var(--sp-10);
+  gap: var(--sp-6);          /* Consistent spacing between sections */
+}
+
+
+/* ── 2. App Header ─────────────────────────────────────────
+   A horizontal bar with the title on the left and the
+   settings gear icon button on the right.
+   ─────────────────────────────────────────────────────── */
+.app-header {
+  display: flex;
+  justify-content: space-between;   /* Push title & icon to opposite ends */
+  align-items: center;
+  width: 100%;
+  max-width: 420px;                  /* Keep everything in a readable column */
+}
+
+.app-title {
+  font-family: var(--font-body);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  color: var(--clr-text-primary);
+  letter-spacing: -0.02em;
+}
