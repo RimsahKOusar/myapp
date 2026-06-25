@@ -1,0 +1,31 @@
+/*
+  ============================================================
+  FILE: js/settings.js
+  PURPOSE: Manages the settings side panel — opening it,
+           closing it, and saving updated duration values.
+
+  USER FLOW:
+  1. User clicks ⚙ → panel slides in from the right
+  2. User edits minute values in the inputs
+  3. User clicks Save → state.durations is updated,
+     the current timer resets to the new duration,
+     panel closes
+  4. User clicks ✕ or the overlay → panel closes
+     (without saving any unsaved changes)
+  ============================================================
+*/
+
+
+/* ── DOM References ────────────────────────────────────────
+   All elements the settings module touches.
+   ─────────────────────────────────────────────────────── */
+const elPanel        = document.getElementById('settingsPanel');
+const elOverlay      = document.getElementById('overlay');
+const btnSettingsBtn = document.getElementById('btnSettings');
+const btnClosePanel  = document.getElementById('btnCloseSettings');
+const btnSavePanel   = document.getElementById('btnSave');
+
+/* The three number inputs */
+const inputWork  = document.getElementById('setWork');
+const inputShort = document.getElementById('setShort');
+const inputLong  = document.getElementById('setLong');
