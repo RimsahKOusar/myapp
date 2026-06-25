@@ -91,3 +91,6 @@ function renderTimer() {
   const offset   = RING_CIRCUMFERENCE * (1 - progress);
   elRing.style.strokeDashoffset = offset;
 }
+
+
+
