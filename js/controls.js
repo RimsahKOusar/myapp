@@ -42,3 +42,21 @@ function initControls() {
     syncStartButton();        // Put the Start button back to ▶ Start
   });
 }
+/* ── triggerPulse() ────────────────────────────────────────
+   Adds the .pulse CSS class to the Start button momentarily
+   to create the ring-expand animation (defined in
+   css/controls.css under @keyframes btnPulse).
+
+   We remove then re-add the class so clicking Start multiple
+   times always re-triggers the animation.
+   ─────────────────────────────────────────────────────── */
+function triggerPulse() {
+  btnStart.classList.remove('pulse');
+
+  /* requestAnimationFrame forces the browser to paint one
+     frame without .pulse before we add it back — this
+     "restarts" the CSS animation reliably.                */
+  requestAnimationFrame(() => {
+    btnStart.classList.add('pulse');
+  });
+}
