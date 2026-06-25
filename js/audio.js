@@ -45,3 +45,36 @@ function playAlert() {
   playTone(880, 0.0,  0.15);   // A5  starts immediately, lasts 0.15s
   playTone(660, 0.2,  0.25);   // E5  starts 0.2s later,  lasts 0.25s
 }
+
+/* ── playTone(frequency, delaySeconds, durationSeconds) ───
+   Internal helper that creates and plays a single tone.
+
+   @param {number} freq     - Pitch in Hz (440 = concert A)
+   @param {number} delay    - How many seconds to wait before playing
+   @param {number} duration - How long the tone lasts in seconds
+   ─────────────────────────────────────────────────────── */
+function playTone(freq, delay, duration) {
+  const now = audioCtx.currentTime;   // Current time in the audio timeline
+
+  /* --- Create an oscillator (the tone generator) --- */
+  const oscillator = audioCtx.createOscillator();
+  oscillator.type      = 'sine';      // Sine wave = smooth, not harsh
+  oscillator.frequency.value = freq;
+
+  /* --- Create a gain node (volume control) ---
+     We ramp the volume from 0 → 0.3 → 0 (a soft "pop").
+     This avoids a clicking artifact that happens when sound
+     starts or stops abruptly at non-zero volume.            */
+  const gainNode = audioCtx.createGain();
+  gainNode.gain.setValueAtTime(0, now + delay);
+  gainNode.gain.linearRampToValueAtTime(0.3, now + delay + 0.01); // Fade in
+  gainNode.gain.linearRampToValueAtTime(0,   now + delay + duration); // Fade out
+
+  /* --- Wire up: oscillator → gain → speakers --- */
+  oscillator.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+
+  /* --- Schedule start and stop --- */
+  oscillator.start(now + delay);
+  oscillator.stop(now + delay + duration);
+}
